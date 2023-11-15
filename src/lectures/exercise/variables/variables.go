@@ -7,12 +7,16 @@ package main
 
 import "fmt"
 
-func main() {
-	var fc = "blue"
-	by, age := 1983, 39
-	fi := "D"
-	li := "H"
+const (
+	firstInitial string = "D"
+	lastInitial  string = "H"
+)
 
-	fmt.Println("My name is", fi, li, "and I am", age, "years old.")
-	fmt.Println("I was born in", by, "and my favorite color is", fc)
+func main() {
+	var fc string = "Blue"
+	birthYear, age := 1983, 39
+	ageInDays := age * 365
+	fmt.Println("My name is", firstInitial, lastInitial, "and I am", age, "years old.")
+	fmt.Println("I was born in", birthYear, "and my favorite color is", fc)
+	fmt.Println("I am", ageInDays, "days old.")
 }
