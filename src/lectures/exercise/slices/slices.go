@@ -19,4 +19,12 @@ import "fmt"
 type Part string
 
 func main() {
+	al := []Part{"Part 1", "Part 2", "Part 3"}
+	fmt.Println(al)
+
+	al = append(al, "Part 4", "Part 5")
+	fmt.Println(al)
+
+	al = al[3:]
+	fmt.Println(al)
 }
