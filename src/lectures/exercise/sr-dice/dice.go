@@ -23,7 +23,69 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+// roll simulates a dice roll with the given number of sides.
+func roll(sides int) int {
+	// rand will return a number between 0 and sides.
+	// We want a number between 1 and sides, so we add 1.
+	return rand.Intn(sides) + 1
+}
+
+// isSnakeEyes takes a sum as an integer and dice as an integer
+// and evaluates if the sum is 2 and the dice is 2.
+func isSnakeEyes(sum, dice int) bool {
+	return sum == 2 && dice == 2
+}
+
+// isLuckySeven takes a sum as an integer and evaluates if the sum is 7.
+func isLuckySeven(sum int) bool {
+	return sum == 7
+}
+
+// isEven takes a sum as an integer and evaluates if the sum is even.
+func isEven(sum int) bool {
+	return sum%2 == 0
+}
+
+// isOdd takes a sum as an integer and evaluates if the sum is odd.
+func isOdd(sum int) bool {
+	return sum%2 == 1
+}
+
+// printResult prints the result of a dice roll.
+func printResult(r, d, rolled, sum, dice int) {
+	fmt.Printf("Roll %d, die %d: %d\n", r, d, rolled)
+	fmt.Printf("Sum of roll %d: %d\n", r, sum)
+	if isSnakeEyes(sum, dice) {
+		fmt.Println("Snake eyes!")
+	}
+	if isLuckySeven(sum) {
+		fmt.Println("Lucky 7!")
+	}
+	if isEven(sum) {
+		fmt.Println("Even!")
+	}
+	if isOdd(sum) {
+		fmt.Println("Odd!")
+	}
+}
 
 func main() {
+	rand.New(rand.NewSource(time.Now().UnixNano()))
+	dice, sides := 2, 12
+	rolls := 2
+
+	for r := 1; r <= rolls; r++ {
+		sum := 0
+		for d := 1; d <= dice; d++ {
+			rolled := roll(sides)
+			sum += rolled
+			printResult(r, d, rolled, sum, dice)
+		}
+	}
 }
