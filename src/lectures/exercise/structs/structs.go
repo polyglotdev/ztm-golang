@@ -19,6 +19,29 @@ package main
 
 import "fmt"
 
-func main() {
+type Rectangle struct {
+	Length float64
+	Width  float64
+}
 
+func Area(r Rectangle) float64 {
+	return r.Length * r.Width
+}
+
+func Perimeter(r Rectangle) float64 {
+	return 2*r.Length + 2*r.Width
+}
+
+func DoubleSize(r Rectangle) Rectangle {
+	r.Length *= 2
+	r.Width *= 2
+	return r
+}
+
+func main() {
+	r := Rectangle{Length: 3, Width: 7}
+	fmt.Println("Area:", Area(r))
+
+	double := DoubleSize(r)
+	fmt.Println("Area:", Area(double))
 }
