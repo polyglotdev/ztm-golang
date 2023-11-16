@@ -29,6 +29,66 @@ const (
 	Retired     = 3
 )
 
+func onlineServersCount(servers map[string]int) int {
+	count := 0
+	for _, status := range servers {
+		if status == Online {
+			count++
+		}
+	}
+	return count
+}
+
+func offlineServersCount(servers map[string]int) int {
+	count := 0
+	for _, status := range servers {
+		if status == Offline {
+			count++
+		}
+	}
+	return count
+}
+
+func maintenanceServersCount(servers map[string]int) int {
+	count := 0
+	for _, status := range servers {
+		if status == Maintenance {
+			count++
+		}
+	}
+	return count
+}
+
+func retiredServersCount(servers map[string]int) int {
+	count := 0
+	for _, status := range servers {
+		if status == Retired {
+			count++
+		}
+	}
+	return count
+}
+
+func displayServerInfo(servers map[string]int) {
+	fmt.Println("Number of servers:", len(servers))
+	fmt.Println("Online servers:", onlineServersCount(servers))
+	fmt.Println("Offline servers:", offlineServersCount(servers))
+	fmt.Println("Maintenance servers:", maintenanceServersCount(servers))
+	fmt.Println("Retired servers:", retiredServersCount(servers))
+}
+
 func main() {
 	servers := []string{"darkstar", "aiur", "omicron", "w359", "baseline"}
+	serverStatuses := make(map[string]int)
+	for _, server := range servers {
+		serverStatuses[server] = Online
+	}
+	displayServerInfo(serverStatuses)
+	serverStatuses["darkstar"] = Retired
+	serverStatuses["aiur"] = Offline
+	displayServerInfo(serverStatuses)
+	for server := range serverStatuses {
+		serverStatuses[server] = Maintenance
+	}
+	displayServerInfo(serverStatuses)
 }
